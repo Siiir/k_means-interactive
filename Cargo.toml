@@ -1,0 +1,30 @@
+[package]
+# About
+name = "k_means-interactive"
+description = "An interactive & specialized version of k-means. Has GUI which allows for convenient stepping through the algorithm."
+# Ownership
+authors = ["Tomasz Nehring"]
+license = "MIT"
+# Versions
+version = "0.1.0"
+edition = "2021"
+# Websites
+repository = "https://github.com/siiir/k_means-interactive"
+
+[lib]
+name = "k_means"
+
+[dependencies]
+slint = "1.5.1"
+
+[build-dependencies]
+slint-build = "1.5.1"
+
+[profile.f_compile]
+inherits = "dev"
+opt-level = 0
+debug = 0
+strip = "none"
+lto = false
+codegen-units = 256
+incremental = true
