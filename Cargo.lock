@@ -2143,7 +2143,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "k_means"
+name = "k_means-interactive"
 version = "0.1.0"
 dependencies = [
  "slint",
