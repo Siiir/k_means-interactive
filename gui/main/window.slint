@@ -1,0 +1,27 @@
+import { MainToolbar } from "../main/toolbar.slint";
+import { VerticalBox } from "std-widgets.slint";
+import { MainPlane } from "./plain.slint";
+import { GuiCfg } from "../cfg.slint";
+import { Logic } from "../logic.slint";
+import { GuiCfg, AppCfg } from "../cfg.slint";
+
+export { Logic, GuiCfg, AppCfg }
+
+export component MainFrame inherits VerticalBox {
+    toolbar := MainToolbar {
+        height: 10%;
+    }
+
+    MainPlane {
+        height: 90%;
+        group_count: clamp(Logic.loosely_parse_int(toolbar.group_count), AppCfg.min_group_count, AppCfg.max_group_count);
+        point_count: clamp(Logic.loosely_parse_int(toolbar.point_count), AppCfg.min_point_count, AppCfg.max_point_count);
+        point_size: clamp(Logic.loosely_parse_int(toolbar.point_size), AppCfg.min_point_size, AppCfg.max_point_size);
+    }
+}
+
+export component MainWindow inherits Window {
+    min-width: 1400px;
+    min-height: (self.min-width / 2) + GuiCfg.font_size;
+    MainFrame { }
+}

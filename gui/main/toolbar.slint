@@ -1,0 +1,19 @@
+import { HorizontalBox, Button } from "std-widgets.slint";
+import { SubseqStepBox } from "../step/subseq/subseq_step.slint";
+import { StepCountInput } from "../step/step_input.slint";
+import { UIntIO } from "../io/var_input.slint";
+import { AppCfg } from "../cfg.slint";
+
+export component MainToolbar inherits HorizontalBox {
+    out property <string> group_count: group_count_io.value;
+    out property <string> point_count: point_count_io.value;
+    out property <string> point_size: point_size.value;
+    
+    group_count_io := UIntIO {name: "groups"; value: "3";}
+    point_count_io := UIntIO {name: "elements"; value: "100";}
+    point_size := UIntIO {name: "density"; value: AppCfg.default_point_size;}
+    SubseqStepBox { step_count: 1;}
+    SubseqStepBox { step_count: 2;}
+    SubseqStepBox { step_count: 3;}
+    SubseqStepBox { step_count: 4;}
+}

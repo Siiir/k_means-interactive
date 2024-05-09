@@ -1,6 +1,8 @@
-slint::include_modules!();
+use slint::ComponentHandle;
 
 fn main() {
-    let app_win = AppWindow::new().unwrap();
-    app_win.run().unwrap();
+    // Construct
+    let gui = k_means::new_gui();
+    // Run
+    gui.run().unwrap();
 }

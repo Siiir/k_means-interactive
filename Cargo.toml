@@ -15,6 +15,8 @@ repository = "https://github.com/siiir/k_means-interactive"
 name = "k_means"
 
 [dependencies]
+palette = "0.7.6"
+rand = "0.8.5"
 slint = "1.5.1"
 
 [build-dependencies]

@@ -1,0 +1,20 @@
+import { Logic } from "../logic.slint";
+import { RandPoint } from "../rand/point.slint";
+import { AppCfg } from "../cfg.slint";
+
+export component MainPlane inherits Rectangle {
+    in property <int> point_count;
+    in property <int> group_count;
+    in property <float> point_size: AppCfg.default_point_size;
+
+    for x in self.point_count: RandPoint {
+        // Model
+        model_group: mod(Logic.rand_natural_int(), group_count);
+        model_rel_group: self.model_group / root.group_count;
+        // Look
+        size: sqrt(parent.width * parent.height / root.point_count / (1px * 1px)) * root.point_size * 0.01px;
+        // Visual location
+        x: self.model_x * (parent.width - self.width);
+        y: 0.92 * self.model_y * (parent.height - self.height);
+    }
+}

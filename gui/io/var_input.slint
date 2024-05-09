@@ -1,0 +1,32 @@
+import { HorizontalBox } from "std-widgets.slint";
+import { GuiCfg } from "../cfg.slint";
+
+export component VarIO inherits Rectangle {
+    border-width: GuiCfg.font_size * 2%;
+    border-color: black;
+
+    in property <string> name;
+    in property <InputType> type;
+    in-out property <string> value;
+
+    HorizontalBox {
+        Text {
+            text: name + ": ";
+            font-size: GuiCfg.font_size;
+        }
+
+        Rectangle {
+            border-width: GuiCfg.font_size * 1%;
+            border-color: black;
+            TextInput {
+                text <=> root.value;
+                input-type: root.type;
+                font-size: GuiCfg.font_size;
+            }
+        }
+    }
+}
+
+export component UIntIO inherits VarIO {
+    type: InputType.number;
+}
