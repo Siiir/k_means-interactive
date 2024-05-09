@@ -1,0 +1,14 @@
+import { RandPoint } from "rand.slint";
+import { Logic } from "../logic.slint";
+
+export component Centroid inherits RandPoint {
+    in property <float> alpha: 0.5;
+
+    // Model location
+    model_x: clamp(Logic.rand_fract_float(), 0.3, 0.7);
+    model_y: clamp(Logic.rand_fract_float(), 0.3, 0.7);
+
+    // Look
+    background: Logic.group_color_with_alpha(self.model_rel_group, self.alpha);
+    size: 40px;
+}

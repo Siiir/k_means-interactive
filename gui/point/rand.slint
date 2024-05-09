@@ -1,0 +1,8 @@
+import { Point } from "./point.slint";
+import { Logic } from "../logic.slint";
+
+export component RandPoint inherits Point {
+    // Model location
+    in-out property <float> model_x: Logic.rand_fract_float();
+    in-out property <float> model_y: Logic.rand_fract_float();
+}

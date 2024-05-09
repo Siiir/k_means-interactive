@@ -1,6 +1,6 @@
 import { Logic } from "../logic.slint";
 
-export component RandPoint inherits Rectangle {
+export component Point inherits Rectangle {
     // Look
 
     in property <length> size: 20px;
@@ -13,6 +13,5 @@ export component RandPoint inherits Rectangle {
     /// Group number.
     in-out property <int> model_group;
     in property <float> model_rel_group;
-    out property <float> model_x: Logic.rand_fract_float();
-    out property <float> model_y: Logic.rand_fract_float();
 }
+

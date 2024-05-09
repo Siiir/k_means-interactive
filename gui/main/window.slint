@@ -10,7 +10,7 @@ export component MainFrame inherits VerticalBox {
         height: 10%;
     }
 
-    MainPlane {
+    main_plain := MainPlane {
         height: 90%;
         group_count: clamp(Logic.loosely_parse_int(toolbar.group_count), AppCfg.min_group_count, AppCfg.max_group_count);
         point_count: clamp(Logic.loosely_parse_int(toolbar.point_count), AppCfg.min_point_count, AppCfg.max_point_count);
