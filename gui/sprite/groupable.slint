@@ -1,0 +1,20 @@
+import { Logic } from "../logic.slint";
+
+export component GroupableSprite inherits Rectangle {
+    // Model – Required
+    in property <int> group_count;
+    in property <int> point_count;
+    in property <int> simul_step;
+    in property <int> group;
+    // Model – Abstract
+    in property <float> model_x;
+    in property <float> model_y;
+    // Model – Provided
+    in property <float> model_rel_group: self.group / self.group_count;
+
+    // Look - Provided
+    background: Logic.group_color(self.model_rel_group);
+    in property <float> scale: 20.;
+    width: self.scale * 1px;
+    height: self.scale * 1px;
+}

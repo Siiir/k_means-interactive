@@ -1,6 +1,12 @@
 export global GuiCfg {
+    // Font
     in-out property <length> font_size: 50px;
+    // Widget ratios
     in-out property <float> point_to_centroid_s_mult: 4;
+    // Point scale
+    in-out property <float> min_point_scale: 5;
+    in-out property <float> default_point_scale: 20;
+    in-out property <float> max_point_scale: 80;
 }
 
 export global AppCfg{
@@ -12,8 +18,8 @@ export global AppCfg{
     in-out property <int> min_point_count: 5;
     in-out property <int> default_point_count: 100;
     in-out property <int> max_point_count: 999;
-    // Point size
-    in-out property <int> min_point_size: 5;
-    in-out property <int> default_point_size: 20;
-    in-out property <int> max_point_size: 80;
+    // Simulation step
+    in-out property <int> min_simul_step: 0;
+    in-out property <int> default_simul_step: 0;
+    in-out property <int> max_simul_step: 255;
 }

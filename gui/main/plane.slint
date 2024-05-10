@@ -1,0 +1,37 @@
+// Globals
+import { Logic } from "../logic.slint";
+import { AppCfg, GuiCfg } from "../cfg.slint";
+// Components
+import { Plane } from "../base/plane.slint";
+import { Centroid } from "../sprite/centroid.slint";
+import { Point } from "../sprite/point.slint";
+
+export component MainPlane inherits Plane {
+
+    for group_num in self.group_count: Centroid {
+        // Model – Provided
+        group_count: root.group_count;
+        point_count: root.point_count;
+        simul_step: root.simul_step;
+        group: group_num;
+        // Look 
+        scale: 0.01 * root.centroid_scale * sqrt((parent.width/1px) * (parent.height/1px) / root.point_count );
+        // Visual location
+        // FixMe: should pull this information from `CentroidInfo` instead.
+        x: self.model_x * (parent.width - self.width / GuiCfg.point_to_centroid_s_mult);
+        y: 0.92 * self.model_y * (parent.height - self.height / GuiCfg.point_to_centroid_s_mult);
+    }
+
+    for idx in self.point_count: Point {
+        // Model – Provided
+        group_count: root.group_count;
+        point_count: root.point_count;
+        simul_step: root.simul_step;
+        group: mod(Logic.rand_natural_int(), self.group_count); // FixMe: Should pull this information from `PointInfo` instead
+        // Look
+        scale: 0.01 * root.point_scale * sqrt((parent.width/1px) * (parent.height/1px) / root.point_count);
+        // Look – visual location
+        x: self.model_x * (parent.width - self.width);
+        y: 0.92 * self.model_y * (parent.height - self.height);
+    }
+}

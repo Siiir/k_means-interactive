@@ -1,0 +1,11 @@
+import { AppCfg, GuiCfg } from "../cfg.slint";
+
+export component Plane inherits Rectangle {
+    // Provided – Model
+    in property <int> group_count: AppCfg.default_point_count;
+    in property <int> point_count: AppCfg.default_point_count;
+    in property <int> simul_step: AppCfg.default_simul_step;
+    // Provided – Look
+    in property <float> point_scale: GuiCfg.default_point_scale;
+    in property <float> centroid_scale: GuiCfg.default_point_scale * GuiCfg.point_to_centroid_s_mult;
+}
