@@ -2161,6 +2161,7 @@ dependencies = [
 name = "k_means-interactive"
 version = "0.1.0"
 dependencies = [
+ "derive_more",
  "palette",
  "rand",
  "slint",

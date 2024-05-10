@@ -19,7 +19,7 @@ export component MainPlane inherits Rectangle {
         y: 0.92 * self.model_y * (parent.height - self.height / GuiCfg.point_to_centroid_s_mult);
     }
 
-    for _ in self.point_count: RandPoint {
+    for idx in self.point_count: RandPoint {
         // Model
         model_group: mod(Logic.rand_natural_int(), group_count);
         model_rel_group: self.model_group / root.group_count;
