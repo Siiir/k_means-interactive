@@ -1,3 +1,4 @@
+use core::panic;
 use std::rc::Rc;
 
 pub use rand::IdentifiableRandPoints;
@@ -31,7 +32,7 @@ pub trait PointSrc {
 }
 
 /// # Causes panic
-/// * Calling the provided getter on negative `i32` value.
+/// * Calling the provided getter on value that cannot be converted to `usize`.
 fn coord_getter_for_i32_idx<S>(
     point_src: Rc<S>,
     coordinate_num: usize,
@@ -39,11 +40,18 @@ fn coord_getter_for_i32_idx<S>(
 where
     S: ?Sized + PointSrc + 'static,
 {
+    use anyhow::Context;
+
     move |point_idx| {
         point_src.get(
             point_idx
                 .try_into()
-                .expect("point index should be non-negative"),
+                .with_context(|| {
+                    format!(
+                "point indexer received invalid point index that cannot be converted to `usize`",
+            )
+                })
+                .unwrap_or_else(|e| panic!("{e}")),
         )[coordinate_num]
     }
 }

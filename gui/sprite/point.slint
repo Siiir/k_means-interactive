@@ -1,12 +1,10 @@
 import { PointInfo } from "../info.slint";
 import { GroupableSprite } from "groupable.slint";
+import { UIntIO } from "../io/var_input.slint";
+import { Logic } from "../logic.slint";
 
 export component Point inherits GroupableSprite {
     // Required
-    in property <int> index;
-
-    // Model – Implemented
-    model_x: PointInfo.x(self.index);    
-    model_y: PointInfo.y(self.index);    
+    in property <int> index: 42;
 }
 

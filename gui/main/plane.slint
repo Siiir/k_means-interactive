@@ -1,5 +1,6 @@
 // Globals
 import { Logic } from "../logic.slint";
+import { PointInfo } from "../info.slint";
 import { AppCfg, GuiCfg } from "../cfg.slint";
 // Components
 import { Plane } from "../base/plane.slint";
@@ -15,15 +16,20 @@ export component MainPlane inherits Plane {
         simul_step: root.simul_step;
         group: group_num;
         // Look 
-        scale: 0.01 * root.centroid_scale * sqrt((parent.width/1px) * (parent.height/1px) / root.point_count );
+        scale: 0.01 * root.centroid_scale * sqrt((parent.width/1px) * (parent.height/1px) / 100 );
         // Visual location
         // FixMe: should pull this information from `CentroidInfo` instead.
         x: self.model_x * (parent.width - self.width / GuiCfg.point_to_centroid_s_mult);
         y: 0.92 * self.model_y * (parent.height - self.height / GuiCfg.point_to_centroid_s_mult);
     }
 
-    for idx in self.point_count: Point {
-        // Model – Provided
+    for index in self.point_count: Point {
+        // Model – Provided `Point` values
+        index: index;
+        // Model – Implemented
+        model_x: PointInfo.x(self.index);    
+        model_y: PointInfo.y(self.index);    
+        // Model – Provided `GroupableSprite` values
         group_count: root.group_count;
         point_count: root.point_count;
         simul_step: root.simul_step;

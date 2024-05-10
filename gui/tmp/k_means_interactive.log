@@ -1,0 +1,13 @@
+2024-05-10 13:53:23.234917320 [DEBUG] <smithay_client_toolkit::registry:456>:Bound new global [59] wl_output v4
+2024-05-10 13:53:23.235202408 [DEBUG] <smithay_client_toolkit::registry:496>:Bound new global [31] zxdg_output_manager_v1 v3
+2024-05-10 13:53:23.236438265 [DEBUG] <smithay_client_toolkit::registry:456>:Bound new global [10] wl_seat v7
+2024-05-10 13:53:23.253437459 [DEBUG] <smithay_client_toolkit::registry:496>:Bound new global [16] wp_cursor_shape_manager_v1 v1
+2024-05-10 13:53:23.253712186 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Argb8888
+2024-05-10 13:53:23.253800888 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Xrgb8888
+2024-05-10 13:53:23.253898671 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Argb2101010
+2024-05-10 13:53:23.253986849 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Xrgb2101010
+2024-05-10 13:53:23.254072649 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Abgr2101010
+2024-05-10 13:53:23.254156292 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Xbgr2101010
+2024-05-10 13:53:23.254230379 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Abgr16161616
+2024-05-10 13:53:23.254306419 [DEBUG] <smithay_client_toolkit::shm:123>:supported wl_shm format Xbgr16161616
+2024-05-10 13:53:23.259572581 [DEBUG] <smithay_client_toolkit::registry:456>:Bound new global [10] wl_seat v7
