@@ -1,10 +1,10 @@
 import { GuiCfg } from "../cfg.slint";
 
 export component StepCountInput inherits TextInput {
-    in-out property <string> step_count;
+    in-out property <string> steps_in_batch;
 
     // Input properties
-    text <=> root.step_count;
+    text <=> root.steps_in_batch;
     input-type: InputType.number;
     // Display properties
     font-size: GuiCfg.font_size;

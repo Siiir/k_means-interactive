@@ -21,6 +21,7 @@ palette = "0.7.6"
 rand = "0.8.5"
 simple-log = "1.6.0"
 slint = "1.5.1"
+thiserror = "1.0.60"
 
 [build-dependencies]
 slint-build = "1.5.1"

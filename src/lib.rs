@@ -1,4 +1,4 @@
-use std::rc::Rc;
+use std::{num::NonZeroUsize, rc::Rc};
 
 use rand::Rng;
 
@@ -8,22 +8,45 @@ pub mod group;
 
 pub use point_src::PointSrc;
 pub mod point_src;
+pub use state_serv::{
+    el_state::{
+        centroids_in_simul::CentroidsStatesInSimul, points_in_simul::PointsStatesInSimul,
+        ElsStatesInSimul,
+    },
+    simul_params::SimulParams,
+};
 pub mod state_serv;
 pub mod util;
+
+pub const MAX_POINT_COUNT: NonZeroUsize = unsafe {
+    // Safety:
+    // Provided literal should be > 0.
+    NonZeroUsize::new_unchecked(999)
+};
+const _CAN_BE_EXCEEDED: () = assert!(MAX_POINT_COUNT.get() < usize::MAX);
 
 pub fn new_gui() -> MainWindow {
     // Construct main window
     let main_win = MainWindow::new().unwrap();
     // Init logic
     {
-        let point_src = Rc::<crate::point_src::IdentifiableRandPoints>::default();
+        {
+            let app_cfg = main_win.global::<AppCfg>();
+            app_cfg.set_max_point_count(
+                MAX_POINT_COUNT
+                    .get()
+                    .try_into()
+                    .expect("value to be in boundaries of `i32`"),
+            );
+        }
+        let point_src = Rc::<crate::point_src::IdentifiablePartRandPoints>::default();
         {
             let point_info = main_win.global::<PointInfo>();
             point_info.on_x(point_src.clone().coord_x_getter_for_i32_idx());
             point_info.on_y(point_src.clone().coord_y_getter_for_i32_idx());
         }
-        let logic = main_win.global::<Logic>();
         {
+            let logic = main_win.global::<Logic>();
             let _future_use_of_point_src = point_src;
             logic.on_rand_fract_float(|| rand::thread_rng().gen());
             logic.on_rand_natural_int(|| rand::thread_rng().gen::<i32>() & i32::MAX);

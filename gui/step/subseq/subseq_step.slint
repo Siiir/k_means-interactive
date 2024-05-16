@@ -14,16 +14,17 @@ export component SubseqStepBox inherits Rectangle {
     border-width: GuiCfg.font_size * 2%;
     border-color: black;
 
-    in-out property <string> step_count;
+    in-out property <int> current_step;
+    in-out property <string> steps_in_batch;
 
     HorizontalBox {
         StepCountInput {
-            step_count <=> root.step_count;
+            steps_in_batch <=> root.steps_in_batch;
         }
 
         SubseqStepButt {
             clicked => {
-                Logic.algorithm_step(root.step_count)
+                root.current_step += Logic.loosely_parse_int(root.steps_in_batch);
             }
         }
     }

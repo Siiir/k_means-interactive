@@ -8,12 +8,14 @@ export component MainToolbar inherits HorizontalBox {
     out property <string> group_count: group_count_io.value;
     out property <string> point_count: point_count_io.value;
     out property <string> point_scale: point_scale.value;
+    out property <int> current_step: 0;
     
     group_count_io := UIntIO {name: "groups"; value: "3";}
     point_count_io := UIntIO {name: "elements"; value: "100";}
     point_scale := UIntIO {name: "density"; value: GuiCfg.default_point_scale;}
-    SubseqStepBox { step_count: 1;}
-    SubseqStepBox { step_count: 2;}
-    SubseqStepBox { step_count: 3;}
-    SubseqStepBox { step_count: 4;}
+
+    SubseqStepBox { steps_in_batch: 1; current_step <=> root.current_step;}
+    SubseqStepBox { steps_in_batch: 2; current_step <=> root.current_step;}
+    SubseqStepBox { steps_in_batch: 3; current_step <=> root.current_step;}
+    SubseqStepBox { steps_in_batch: 4; current_step <=> root.current_step;}
 }
