@@ -13,6 +13,7 @@ pub struct IdentifiablePartRandPoints {
 }
 
 impl IdentifiablePartRandPoints {
+    // Constants
     pub const BUF_GROWTH: NonZeroUsize = unsafe {
         // Safety:
         // The base literal is literally > 0 .
@@ -31,8 +32,20 @@ impl IdentifiablePartRandPoints {
         self.observed.borrow().len()
     }
 
-    // CRUD-U: Buffer-extending iterators
-    pub fn copying_iter<'s>(&'s mut self) -> impl Iterator<Item = super::Point> + 's {
+    // CRUD-U: Buffer extenders
+    pub fn grow_buf(&self) {
+        self.grow_buf_by(Self::BUF_GROWTH)
+    }
+    pub fn grow_buf_by(&self, growth: NonZeroUsize) {
+        grow_buf_by(&mut self.observed.borrow_mut(), growth)
+    }
+}
+
+// CRUD-U: Extending {getters & iterators}
+impl PointSrc for IdentifiablePartRandPoints {
+    /// # Causes panic
+    /// If other `self`s method is invoked before returned iterator is consumed.
+    fn iter<'s>(&'s self) -> impl Iterator<Item = super::Point> + 's {
         let mut observed = self.observed.borrow_mut();
         let mut next_buf_growth_on_idx = 0;
         let mut curr_idx = 0;
@@ -51,23 +64,12 @@ impl IdentifiablePartRandPoints {
             }
         })
     }
-    // CRUD-U: Buffer extenders
-    pub fn grow_buf(&self) {
-        self.grow_buf_by(Self::BUF_GROWTH)
-    }
-    pub fn grow_buf_by(&self, growth: NonZeroUsize) {
-        grow_buf_by(&mut self.observed.borrow_mut(), growth)
-    }
-}
-
-// CRUD-U: Extending getters
-impl PointSrc for IdentifiablePartRandPoints {
     /// Get the previous observation for provided `idx` or generates a new pseudo random one.
     ///
     /// # Returns
     /// * On the first call with `idx` = n: pseudo random point (x, y) where x, y in [0; 1).
     /// * On next calls with `idx` = n: same value as on the first call.
-    fn get(self: &IdentifiablePartRandPoints, idx: usize) -> Result<super::Point, IdxOutOfBounds> {
+    fn get(&self, idx: usize) -> Result<super::Point, IdxOutOfBounds> {
         let mut observed_mut = self.observed.borrow_mut();
 
         ensure_idx_exists(&mut observed_mut, idx)?;

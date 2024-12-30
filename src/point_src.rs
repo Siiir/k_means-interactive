@@ -13,8 +13,14 @@ type Point = [f32; 2];
 /// # Constraints for all methods
 /// * _Deterministic_ **when** called from the same object (in the same session).
 pub trait PointSrc {
+    // Required
+
+    fn iter<'s>(&'s self) -> impl Iterator<Item = Point> + 's;
     /// Gets the requested point from the source returning their coordinates.
     fn get(&self, idx: usize) -> Result<Point, err::IdxOutOfBounds>;
+
+    // Provided
+
     fn get_x(&self, idx: usize) -> Result<f32, err::IdxOutOfBounds> {
         self.get(idx).map(|coords| coords[0])
     }

@@ -36,11 +36,12 @@ impl super::ElsStatesInSimul for CentroidsStatesInSimul {
             }
             O::Greater => panic!("logical error: invalid argument passed to the function."),
         }
-        let last_point_states = points_states
+        let last_points_states = points_states
             .last_els_states()
             .expect("There should be some point states, due to forcing correction step.")
             .iter()
             .copied();
+        let points_coords = point_src.iter();
 
         todo!()
     }
